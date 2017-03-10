@@ -121,4 +121,4 @@ The best way to test for now is to enter a phrase such as the following in to th
 
 ![Alexa Skill Service Simulator Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/service-simulator.png "Alexa Skill Service Simulator Screenshot")
 
-This skill should also be available locally on your Echo (dot) device!
+This skill should also be available locally on your Echo (dot) device which you can confirm by visiting [alexa.amazon.com](http://alexa.amazon.com/spa/index.html#skills/your-skills/?ref-suffix=ysa_gw) and searching for the name of the skill that you set originally.
