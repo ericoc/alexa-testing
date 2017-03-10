@@ -4,26 +4,7 @@
 
 Right now I have this set up so that when I say "alexa seizuretest", this skill is activated
 
-... "Alexa, tell seizuretest to log a bad seizure" will send a request containing:
-
-"request": {
-        "type": "IntentRequest",
-        "requestId": "amzn1.echo-api.request.a0-idk-if-this-is-secret-so-im-removing-it-z123",
-        "timestamp": "2017-03-08T23:13:32Z",
-        "locale": "en-US",
-        "intent": {
-            "name": "LogSeizure",
-            "slots": {
-                "Type": {
-                    "name": "Type",
-                    "value": "bad"		# This is only set when the intent indicated that the seizure was "bad"/"awful"/"terrible"/etc.
-                },
-                "Date": {
-                    "name": "Date"
-                }
-            }
-        }
-    }
+like... "Alexa, tell seizuretest to log a bad seizure" or "Alexa, tell seizuretest I'm having a seizure"
 
 */
 
@@ -32,20 +13,28 @@ header('Content-Type: application/json;charset=UTF-8');
 
 // Get input, decode it, and break off the session ID as an example of how to parse input
 $input = json_decode(file_get_contents("php://input"));
+$loginput = json_encode($input, JSON_PRETTY_PRINT);
 if (isset($input)) {
 	$intent = $input->request->intent;
 }
 
 if ($intent->name == 'LogSeizure') {
 
+	if ( (isset($intent->slots->Type->value)) && (!empty($intent->slots->Type->value)) ) {
+		$seizuretype = $intent->slots->Type->value;
+		$badseizuretypes = array('complex', 'complex partial', 'bad', 'terrible', 'major', 'awful');
+	}
+
 	// Be more re-assuring if it is a bad seizure
 	// Right now, the LogSeizure "Type" will only be set when the intent indicated that the seizure was "bad"/"awful"/"terrible"/etc...
-	if (isset($intent->slots->Type->value)) {
-		$phrase = 'o.k., just relax and you will be okay!';
+	if ( (isset($seizuretype)) && (isset($badseizuretypes)) && (in_array($seizuretype, $badseizuretypes)) ) {
+		$phrase = 'Okay, just relax and you will be okay!';
+		$cardphrase = 'No worries - enhance your calm and you\'ll be a\'ight!';
 
 	// Minor seizures are no big deal
 	} else {
-		$phrase = 'o.k., you will be fine!';
+		$phrase = 'Okay, you will be fine!';
+		$cardphrase = 'You\'re fine dude!';
 	}
 }
 
@@ -61,7 +50,7 @@ $outputspeech = array(
 $card = array(
 		'type'		=>	'Simple',
 		'title'		=>	'SeizureTest',
-		'content'	=>	$phrase
+		'content'	=>	$cardphrase
 	);
 
 // Create a null (unused/empty) reprompt array
@@ -89,5 +78,6 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) { $uagent = $_SERVER['HTTP_USER_AGENT'];
 // Append debugging information to a file
 $debugfile = __DIR__ . '/private/seizuretest-debug.txt';
 $debugfh = fopen($debugfile, 'a+');
-fwrite($debugfh, "$when / $ip / $uagent / $phrase\n\n==========\n\n");
+$logmessage = "When: $when\nClient: $ip / $uagent\nPhrase: $phrase\nINPUT:\n$loginput\n---\nOUTPUT:\n$output\n\n===\n\n";
+fwrite($debugfh, $logmessage);
 fclose($debugfh);
