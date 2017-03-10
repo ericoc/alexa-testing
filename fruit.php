@@ -2,7 +2,7 @@
 
 /*
 
-Right now I have this set up so that when I say "alexa fruit", it responds with "XYZ is a fruit" where XYZ is one of the fruits within the $fruits array!
+Right now I have this set up so that when I say "alexa fruit", it responds with "XYZ are a fruit" where XYZ is one of the fruits within the $fruits array!
 
 */
 
