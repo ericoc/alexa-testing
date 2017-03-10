@@ -1,0 +1,21 @@
+{
+  "intents": [
+    {
+      "intent": "LogSeizure",
+      "slots": [
+        {
+          "name": "Type",
+          "type": "BAD_SEIZURE_TYPES"
+        },
+        {
+          "name": "Action",
+          "type": "SEIZURE_ACTION"
+        },
+        {
+          "name": "Date",
+          "type": "AMAZON.DATE"
+        }
+      ]
+    }
+  ]
+}
