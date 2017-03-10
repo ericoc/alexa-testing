@@ -93,7 +93,7 @@ Within the "Configuration" page, select "HTTPS" as the Service Endpoint Type usi
 
 	https://alexa.ericoc.com/seizure.php
 
-which is simply the code from [here](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure.php)
+which is simply the code from [here](../seizure.php)
 
 ...and select "No" regarding Account Linking.
 
