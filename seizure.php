@@ -16,6 +16,7 @@ $input = json_decode(file_get_contents("php://input"));
 $loginput = json_encode($input, JSON_PRETTY_PRINT);
 if (isset($input)) {
 	$intent = $input->request->intent;
+	$timestamp = date('Y-m-d g:i:s A', strtotime($input->request->timestamp));
 }
 
 if ($intent->name == 'LogSeizure') {
@@ -71,13 +72,12 @@ $output = json_encode($response, JSON_PRETTY_PRINT);
 echo $output;
 
 // Get background info on the date+time/IP/user-agent of the request for debugging
-$when = date('Y-m-d g:i:s A');
 if (isset($_SERVER['REMOTE_ADDR'])) { $ip = $_SERVER['REMOTE_ADDR']; } else { $ip = null; }
 if (isset($_SERVER['HTTP_USER_AGENT'])) { $uagent = $_SERVER['HTTP_USER_AGENT']; } else { $uagent = null; }
 
 // Append debugging information to a file
 $debugfile = __DIR__ . '/private/seizuretest-debug.txt';
 $debugfh = fopen($debugfile, 'a+');
-$logmessage = "When: $when\nClient: $ip / $uagent\nPhrase: $phrase\nINPUT:\n$loginput\n---\nOUTPUT:\n$output\n\n===\n\n";
+$logmessage = "When: $timestamp\nClient: $ip / $uagent\nPhrase: $phrase\nINPUT:\n$loginput\n---\nOUTPUT:\n$output\n\n===\n\n";
 fwrite($debugfh, $logmessage);
 fclose($debugfh);
