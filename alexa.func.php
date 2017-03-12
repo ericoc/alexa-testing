@@ -1,22 +1,23 @@
 <?php
 
-// Create a big JSON response for Alexa
-function AlexaOut ($speech, $cardtitle, $cardphrase) {
+// Define a function to create JSON for Alexa to interpret
+function AlexaOut ($speech, $card_title, $card_phrase, $reprompt_speech = null, $end_session = true) {
 
 	// Create the outputSpeech array (This is what Alexa says in response)
-	$outputspeech = array('type' => 'PlainText', 'text' => $speech);
+	$output_speech = array('type' => 'PlainText', 'text' => $speech);
 
 	// Create the card array (This is shown at alexa.amazon.com and within the app)
-	$card = array( 'type' => 'Simple', 'title' => $cardtitle, 'content' => $cardphrase);
+	$card = array( 'type' => 'Simple', 'title' => $card_title, 'content' => $card_phrase);
 
 	// Create a null (unused/empty) reprompt array
 	// (This is used for follow up respones in a proper conversation... I'm not there yet)
-	$reprompt = array('outputSpeech' => array('type' => 'PlainText', 'text' => null));
+	$reprompt = array('outputSpeech' => array('type' => 'PlainText', 'text' => $reprompt_speech));
 
-	// Create final response array combining above arrays before it gets turned in to JSON
-	$response = array('version' => '0.1', 'sessionAttributes' => array(), 'response' => array('outputSpeech' => $outputspeech, 'card' => $card, 'reprompt' => $reprompt), 'shouldEndSession' => true);
+	// Create final array combining above arrays before it gets turned in to JSON
+	$response = array('outputSpeech' => $output_speech, 'card' => $card, 'reprompt' => $reprompt_speech);
+	$final = array('version' => '0.1', 'sessionAttributes' => array(), 'response' => $response, 'shouldEndSession' => $end_session);
 
-	// Turn the final response array in to JSON and send it back to Amazon/Alexa
-	$output = json_encode($response, JSON_PRETTY_PRINT);
+	// Turn the final array in to JSON and send it back to Amazon/Alexa
+	$output = json_encode($final, JSON_PRETTY_PRINT);
 	return $output;
 }
