@@ -13,6 +13,8 @@ automatically find the sunrise and sunset times for the users actual area if the
 
 In any case, http://sunrise-sunset.org/ is awesome!
 
+TODO: store the sunrise/sunset object in memcache/redis to avoid hitting the API on every load
+
 */
 
 // Require the file with the BriefingOut function that builds a JSON response
