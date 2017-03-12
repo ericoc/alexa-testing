@@ -171,9 +171,6 @@ function BriefingOut ($uid, $update_date, $title_text, $main_text, $redirect_url
 	return $out;
 }
 
-// The output is always JSON
-header('Content-Type: application/json;charset=UTF-8');
-
 // Get todays date as YYYYMMDD for checking the games array
 $today = date('Ymd');
 
@@ -194,5 +191,6 @@ if ( (isset($games["$today"])) && (!empty($games["$today"])) ) {
 }
 
 // Finally, generate and return the JSON
+header('Content-Type: application/json;charset=UTF-8');
 $out = BriefingOut($uid, $update_date, $title, $phrase);
 echo $out;
