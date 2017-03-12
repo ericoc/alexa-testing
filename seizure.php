@@ -8,17 +8,21 @@ like... "Alexa, tell seizuretest to log a bad seizure" or "Alexa, tell seizurete
 
 */
 
+// Require the file with the AlexaOut function that builds a JSON response
+require_once('alexa.func.php');
+
 // The output is always JSON
 header('Content-Type: application/json;charset=UTF-8');
 
-// Get input, decode it, and break off the session ID as an example of how to parse input
+// Get input, decode it, and 
 $input = json_decode(file_get_contents("php://input"));
-$loginput = json_encode($input, JSON_PRETTY_PRINT);
-if (isset($input)) {
+if ( (isset($input)) && (!empty($input)) ) {
+	$loginput = json_encode($input, JSON_PRETTY_PRINT);
 	$intent = $input->request->intent;
 	$timestamp = date('Y-m-d g:i:s A', strtotime($input->request->timestamp));
 }
 
+// 
 if ($intent->name == 'LogSeizure') {
 
 	if ( (isset($intent->slots->Type->value)) && (!empty($intent->slots->Type->value)) ) {
@@ -28,48 +32,16 @@ if ($intent->name == 'LogSeizure') {
 
 	// Be more re-assuring if it is a bad seizure
 	// Right now, the LogSeizure "Type" will only be set when the intent indicated that the seizure was "bad"/"awful"/"terrible"/etc...
+	$card_title = 'SeizureTest';
 	if ( (isset($seizuretype)) && (isset($badseizuretypes)) && (in_array($seizuretype, $badseizuretypes)) ) {
-		$phrase = 'Okay, just relax and you will be okay!';
-		$cardphrase = 'No worries - enhance your calm and you\'ll be a\'ight!';
+		$output = AlexaOut('Okay, just relax and you will be okay!', $card_title, 'No worries - enhance your calm and you\'ll be a\'ight!');
 
 	// Minor seizures are no big deal
 	} else {
-		$phrase = 'Okay, you will be fine!';
-		$cardphrase = 'You\'re fine dude!';
+		$output = AlexaOut('Okay, you will be fine!', $card_title, 'You\'re fine dude!');
 	}
+	echo $output;
 }
-
-// Create the outputSpeech array
-// (this is what alexa says in response)
-$outputspeech = array(
-			'type'	=>	'PlainText',
-			'text'	=>	$phrase
-		);
-
-// Create the card array
-// (this is shown at alexa.amazon.com and within the app)
-$card = array(
-		'type'		=>	'Simple',
-		'title'		=>	'SeizureTest',
-		'content'	=>	$cardphrase
-	);
-
-// Create a null (unused/empty) reprompt array
-// (this is used for follow up respones in a proper conversation... I'm not there yet)
-$reprompt = array(
-		'outputSpeech'	=>	array('type' => 'PlainText', 'text' => null)
-	);
-
-// Create final response array combining above arrays, turn it in to JSON, and print it
-// (this is the final JSON returned in response to the JSON request)
-$response = array(
-		'version'		=>	'0.1',
-		'sessionAttributes'	=>	array(),
-		'response'		=>	array('outputSpeech' => $outputspeech, 'card' => $card, 'reprompt' => $reprompt),
-		'shouldEndSession'	=>	true
-	);
-$output = json_encode($response, JSON_PRETTY_PRINT);
-echo $output;
 
 // Get background info on the date+time/IP/user-agent of the request for debugging
 if (isset($_SERVER['REMOTE_ADDR'])) { $ip = $_SERVER['REMOTE_ADDR']; } else { $ip = null; }
@@ -78,6 +50,6 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) { $uagent = $_SERVER['HTTP_USER_AGENT'];
 // Append debugging information to a file
 $debugfile = __DIR__ . '/private/seizuretest-debug.txt';
 $debugfh = fopen($debugfile, 'a+');
-$logmessage = "When: $timestamp\nClient: $ip / $uagent\nPhrase: $phrase\nINPUT:\n$loginput\n---\nOUTPUT:\n$output\n\n===\n\n";
+$logmessage = "When: $timestamp\nClient: $ip / $uagent\nINPUT:\n$loginput\n---\nOUTPUT:\n$output\n\n===\n\n";
 fwrite($debugfh, $logmessage);
 fclose($debugfh);
