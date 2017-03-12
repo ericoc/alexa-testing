@@ -4,7 +4,7 @@
 
 Unfortunately, it is not currently possible to get the device location from within a Flash Briefing skill.
 
-This makes it difficult (impossible?) to have this work automatically for anyone automatically using their location,
+This makes it difficult (impossible?) to have this work for just any one by automatically using their location,
 so I have it hard-coded to Philadelphia right now :(
 
 In any case, http://sunrise-sunset.org is awesome!
