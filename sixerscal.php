@@ -162,14 +162,15 @@ function createPhrase ($game) {
 	}
 
 	// Include the time, date, stadium, city, and state at the end of the friendly phrase
-	$phrase .= ' at ' . date('g:i A', strtotime($game['when'])) . ' on ' . date('l, F jS', strtotime($game['when']));
+	$when = strtotime($game['when']);
+	$phrase .= ' at ' . date('g:i A', $when) . ' on ' . date('l, F jS', $when);
 	$phrase .= ' at ' . $game['stadium'] . ' in ' . $game['city'] . ', ' . $game['state'];
 
 	// Return the phrase string that was built!
 	return $phrase;
 }
 
-// Get todays date as YYYMMDD for checking the array
+// Get todays date as YYYYMMDD for checking the array
 $today = date('Ymd');
 
 // Show friendly phrase for the game today if there is one
