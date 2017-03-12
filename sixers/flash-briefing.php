@@ -3,14 +3,6 @@
 // Create an array of arrays of all the games ($games!)
 $games = array(
 
-	'20170311' => array(
-		'opponent' => 'LA Clippers',
-		'when' => '20170311T153000',
-		'stadium' => 'Staples Center',
-		'city' => 'Los Angeles',
-		'state' => 'CA'
-	),
-
 	'20170312' => array(
 		'opponent' => 'Los Angeles Lakers',
 		'when' => '20170312T213000',
@@ -170,22 +162,38 @@ function createPhrase ($game) {
 	return $phrase;
 }
 
-// Get todays date as YYYYMMDD for checking the array
+// Define a function to create JSON for Alexa Flash Briefing skills
+function BriefingOut ($uid, $update_date, $title_text, $main_text, $redirect_url = null) {
+
+	// Create the short array to return for Flash Briefing skills, JSON encode it, and return it
+	$final = array('uid' => $uid, 'updateDate' => $update_date, 'titleText' => $title_text, 'mainText' => $main_text, 'redirectUrl' => null);
+	$out = json_encode($final, JSON_PRETTY_PRINT);
+	return $out;
+}
+
+// The output is always JSON
+header('Content-Type: application/json;charset=UTF-8');
+
+// Get todays date as YYYYMMDD for checking the games array
 $today = date('Ymd');
 
-// Show friendly phrase for the game today if there is one
+// Get the date in ISO format, generate a UID, and set the title for Alexa
+$update_date = date('c', strtotime($today));
+$uid = uniqid('nba-phila-76ers-', true);
+$title = 'Philadelphia 76ers Games (Flash Briefing)';
+
+// Continue if there is a game today
 if ( (isset($games["$today"])) && (!empty($games["$today"])) ) {
+
+	// Create a friendly phrase to respond with
 	$phrase = createPhrase($games["$today"]);
-	echo "$phrase\n";
+
+	$out = BriefingOut($uid, $update_date, $title, $phrase);
+
+// If there is no game today, say so
+} else {
+	$out = BriefingOut($uid, $update_date, $title, 'Unfortunately, the Philadelphia 76ers are not playing today.');
 }
 
-
-/*
-This will spit out a list of friendly phrases for every game and was great for testing
-
-// Loop through each game creating and echo'ing the friendly phrase
-foreach ($games as $game) {
-	$phrase = createPhrase($game);
-	echo "$phrase\n";
-}
-*/
+// Finally, return the JSON
+echo $out;
