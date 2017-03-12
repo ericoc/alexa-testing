@@ -2,12 +2,16 @@
 
 /*
 
-Unfortunately, it is not currently possible to get the device location from within a Flash Briefing skill.
+Unfortunately, there is no way to get the Echo (dot) device location from within a Flash Briefing skill.
 
-This makes it difficult (impossible?) to have this work for just any one by automatically using their location,
-so I have it hard-coded to Philadelphia right now :(
+This makes it difficult (impossible?) to have this Alexa Skill work for any one by just automatically using their location,
+so I have it hard-coded to Philadelphia right now... :(
 
-In any case, http://sunrise-sunset.org is awesome!
+If Amazon includes a way to get the device location from a custom Flash Briefing Skill, this could easily be modified to
+automatically find the sunrise and sunset times for the users actual area if they enabled this skill.
+...it seems kind of creepy, but even a zip code would be great!
+
+In any case, http://sunrise-sunset.org/ is awesome!
 
 */
 
@@ -44,34 +48,39 @@ function getSunTimes ($latitude, $longitude, $when = 'today') {
 	}
 }
 
-// Create a function to generate a phrase detailing when sunrise and sunset are occurring or have occurred
-function createPhrase ($input) {
+// Create a function to word things correctly based on UNIX timestamps
+function isWas ($some_time) {
 
 	// Get current UNIX timestamp
 	$current_time = time();
 
-	// Pull out sunrise and sunset UNIX timestamps from object passed in to the function
+	// Return "will be" if $some_time has not happened yet, since it is in the future
+	if ($current_time <= $some_time) {
+		$return = 'will be';
+
+	// Otherwise, return "was" if $some_time is in the past and has already occurred
+	} else {
+		$return = 'was';
+	}
+
+	return $return;
+}
+
+// Create a function to generate a phrase detailing when sunrise and sunset are occurring or have occurred
+function createPhrase ($input) {
+
+	// Pull out sunrise and sunset UNIX timestamps from object passed in to this function
 	$sunrise = strtotime($input->sunrise);
 	$sunset = strtotime($input->sunset);
 
 	// Start the phrase with the time of sunrise, determining whether it is in the past or future
-	$phrase = 'Sunrise ';
-	if ($current_time < $sunrise) {
-		$phrase .= 'will be';
-	} else {
-		$phrase .= 'was';
-	}
-	$phrase .= ' at ' . date('g:i A', $sunrise) . ' and sunset ';
+	$phrase = 'Sunrise ' . isWas($sunrise) . ' at ' . date('g:i A', $sunrise);
 
 	// End the phrase with the time of sunset, determining whether it is in the past or future
-	if ($current_time <= $sunset) {
-		$phrase .= 'will be';
-	} else {
-		$phrase .= 'was';
-	}
-	$phrase .= ' at ' . date('g:i A', $sunset) . ' today, ' . date('l, F jS') . '.';
+	$phrase .= ' and sunset ' . isWas($sunset) . ' at ' . date('g:i A', $sunset);
 
-	// Return the phrase that was built
+	// Finish up and return the phrase that was built
+	$phrase .= ' today, ' . date('l, F jS') . '.';
 	return $phrase;
 }
 
