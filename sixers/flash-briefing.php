@@ -185,15 +185,14 @@ $title = 'Philadelphia 76ers Games (Flash Briefing)';
 // Continue if there is a game today
 if ( (isset($games["$today"])) && (!empty($games["$today"])) ) {
 
-	// Create a friendly phrase to respond with
+	// Create a friendly phrase with the details of the game today
 	$phrase = createPhrase($games["$today"]);
 
-	$out = BriefingOut($uid, $update_date, $title, $phrase);
-
-// If there is no game today, say so
+// If there is no game today, set the phrase accordingly
 } else {
-	$out = BriefingOut($uid, $update_date, $title, 'Unfortunately, the Philadelphia 76ers are not playing today.');
+	$phrase = 'Unfortunately, the Philadelphia 76ers are not playing today.';
 }
 
-// Finally, return the JSON
+// Finally, generate and return the JSON
+$out = BriefingOut($uid, $update_date, $title, $phrase);
 echo $out;
