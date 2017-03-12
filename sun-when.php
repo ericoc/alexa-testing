@@ -64,7 +64,7 @@ function createPhrase ($input) {
 	$phrase .= ' at ' . date('g:i A', $sunrise) . ' and sunset ';
 
 	// End the phrase with the time of sunset, determining whether it is in the past or future
-	if ($current_time >= $sunrise) {
+	if ($current_time <= $sunset) {
 		$phrase .= 'will be';
 	} else {
 		$phrase .= 'was';
