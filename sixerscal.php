@@ -172,8 +172,8 @@ function createPhrase ($game) {
 // Get todays date as YYYMMDD for checking the array
 $today = date('Ymd');
 
+// Show friendly phrase for the game today if there is one
 if ( (isset($games["$today"])) && (!empty($games["$today"])) ) {
-//	var_dump($games["$today"]);
 	$phrase = createPhrase($games["$today"]);
 	echo "$phrase\n";
 }
