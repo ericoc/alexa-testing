@@ -13,6 +13,9 @@ if ( (!isset($input->session->user->userId)) || (empty($input->session->user->us
 
 } else {
 
+	// Log the input for debugging right now
+	error_log(print_r($input, true));
+
 	// Connect to MySQL and choose database
 
 	// Set database information/credentials and connect to MySQL

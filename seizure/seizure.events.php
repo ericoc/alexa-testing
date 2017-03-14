@@ -60,9 +60,6 @@ function update_seizure($db_link, $user_id) {
 // Create a function to handle a seizure sent from Alexa
 function handle_seizure ($db_link, $user_id, $intent) {
 
-	// Log the input for debugging right now
-	error_log(print_r($intent, true));
-
 	// Continue with handling the seizure if there is a valid intent
 	if (isset($intent->name)) {
 
