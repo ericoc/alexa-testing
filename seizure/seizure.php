@@ -7,18 +7,17 @@ require_once('seizure.events.php');
 // Get the input from Alexa and JSON-decode it
 $input = json_decode(file_get_contents("php://input"));
 
-// Bail if there was no input from Alexa and
+// No input is probably completely meaningless, but tell how to track a seizure anyways
 if ( (!isset($input->session->user->userId)) || (empty($input->session->user->userId)) ) {
-	$message = 'No input';
+	$message = 'Sorry, but please say, "Tell SeizureTracker to track a seizure", if you would like to track a seizure.';
 
+// Otherwise, continue with finding the user and handling any intent
 } else {
 
 	// Log the input for debugging right now
-	error_log(print_r($input, true));
+	error_log(print_r($input->request, true));
 
-	// Connect to MySQL and choose database
-
-	// Set database information/credentials and connect to MySQL
+	// Set MySQL database credentials and connect to MySQL
 	$db_hostname = 'localhost';
 	$db_username = $db_database = 'seizuretest';
 	require_once('.seizure.dbpassword.php');
@@ -30,21 +29,29 @@ if ( (!isset($input->session->user->userId)) || (empty($input->session->user->us
 	// Continue if user ID was found
 	if (is_numeric($user_id)) {
 
-		// Handle the event based on the intent sent from Alexa
-		$handle_seizure = handle_seizure($db_link, $user_id, $input->request->intent);
+		// Tell the user how to track a seizure if there was no intent determined
+		if ( (!isset($input->request->intent)) || ($input->request->type === 'LaunchRequest') ) {
+			$message = 'Sorry, but please say, "Tell SeizureTracker to track a seizure", if you would like to track a seizure.';
 
-		// The seizure was successfully tracked
-		if ( (isset($handle_seizure)) && (is_numeric($handle_seizure)) ) {
-			$message = 'Okay. The seizure has been tracked.';
-
-		// Set the message awkwardly if we did not get an integer back, meaning an existing seizure got marked as over
-		// (TODO: find a better way of doing this)
-		} elseif ( (isset($handle_seizure)) && (is_string($handle_seizure)) ) {
-			$message = $handle_seizure;
-
-		// Otherwise there was an error adding or finding/updating the seizure
+		// Otherwise, continue with handling the event/seizure
 		} else {
-			$message = 'Sorry. There was an error tracking the seizure.';
+
+			// Handle the event based on the intent sent from Alexa
+			$handle_seizure = handle_seizure($db_link, $user_id, $input->request->intent);
+
+			// The seizure was successfully tracked
+			if ( (isset($handle_seizure)) && (is_numeric($handle_seizure)) ) {
+				$message = 'Okay. The seizure has been tracked.';
+
+			// Set the message awkwardly if we did not get an integer back, meaning an existing seizure got marked as over
+			// (TODO: find a better way of doing this)
+			} elseif ( (isset($handle_seizure)) && (is_string($handle_seizure)) ) {
+				$message = $handle_seizure;
+
+			// Otherwise there was an error adding or finding/updating the seizure
+			} else {
+				$message = 'Sorry. There was an error tracking the seizure.';
+			}
 		}
 
 	// Otherwise, there was an error finding or adding the user
