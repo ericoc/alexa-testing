@@ -10,6 +10,8 @@ $input = json_decode(file_get_contents("php://input"));
 // Continue with finding the user and handling intent assuming we have somewhat valid input
 if ( (isset($input->session->user->userId)) && (!empty($input->session->user->userId)) && (isset($input->request->intent)) && (isset($input->request->intent->name)) ) {
 
+	error_log(print_r($input->request->intent, true));
+
 	// Set MySQL database credentials and connect to MySQL
 	$db_hostname = 'localhost';
 	$db_username = $db_database = 'seizuretest';

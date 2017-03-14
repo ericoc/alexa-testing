@@ -87,9 +87,6 @@ function count_seizures($db_link, $user_id) {
 //
 function handle_seizure ($db_link, $user_id, $intent) {
 
-	// Debugging
-	error_log(print_r($intent, true));
-
 	// Add a new seizure, if requested
 	if ($intent->name == 'LogSeizure') {
 
