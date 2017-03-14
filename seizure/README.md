@@ -16,108 +16,31 @@ You want to create a "Custom" skill named any thing that you would like, and the
 
 ### Interaction Model
 
-These settings set how users interact with Alexa based on their "intent":
-
-![Alexa Skill Interaction Model Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/interaction-model.png "Alexa Skill Interaction Model Screenshot")
+These settings set how users interact with Alexa based on their "intent". This is where the magic happens.
 
 #### Intent Schema
 
-Paste the following in the intent schema, which simply creates a `LogSeizure` using the three "slots" named `Type`, `Action`, and `Thing` that are defined later as well as the `UpdateSeizure` intent which will also use the `Thing` slot:
-
-	{
-	    "intents": [
-	    {
-	        "intent": "LogSeizure",
-	        "slots": [
-	            {
-	                "name": "Type",
-	                "type": "BAD_SEIZURE_TYPES"
-	            },
-	            {
-	                "name": "Action",
-	                "type": "SEIZURE_ACTION"
-	            },
-	            {
-	                "name": "Thing",
-	                "type": "THING"
-	            }
-	        ]
-	    },
-	    {
-	        "intent": "UpdateSeizure",
-	        "slots": [
-	            {
-	                "name": "Thing",
-	                "type": "THING"
-	            }
-	        ]
-	    }
-	    ]
-	}
-
----
+For the "Intent Schema", simply paste the JSON contents of the [seizure-intents.json file from this repository](seizure-intents.json) in to the textarea.
 
 #### Custom Slot Types
 
-Create these three (3) custom slot types:
-
-* Name/Type: `BAD_SEIZURE_TYPES`
-
-  Value:
-
-		complex
-		complex partial
-		bad
-		terrible
-		major
-		awful
-
-* Name/Type: `SEIZURE_ACTION`
-
-  Value:
-
-		add
-		log
-		track
-		record
-		store
-		report
-		is having
-		I'm having
-		I am having
-
-* Name/Type: `THING`
-
-  Value:
-
-		event
-		seizure
+Create the custom slot types as defined within the [custom-slots.txt file from this repository](custom-slots.txt) in this repository.
 
 #### Sample Utterances
 
-Enter the following sample utterances:
-
-	LogSeizure {Action} this {Type} {Thing}
-	LogSeizure {Action} my {Type} {Thing}
-	LogSeizure {Action} a {Type} {Thing}
-	LogSeizure {Action} {Type} {Thing}
-	UpdateSeizure {Thing} is over
-	UpdateSeizure {Thing} ended
-	UpdateSeizure {Thing} has ended
-	UpdateSeizure {Thing} stopped
-	UpdateSeizure {Thing} has stoppped
+Additionally, enter the sample utterances from the [sample-utterances.txt file from this repository](sample-utterances.txt) in this repository.
 
 ---
 
 ### Configuration
 
-Within the "Configuration" page, select "HTTPS" as the Service Endpoint Type using North America, and I've been using the following URL:
+Within the "Configuration" page, select "HTTPS" as the Service Endpoint Type using North America, the following URL:
 
 	https://alexa.ericoc.com/seizure/seizure.php
 
 which is simply the code from [here](seizure.php)
 
-...and select "No" regarding Account Linking.
+...and select "No" regarding Account Linking (for now).
 
 ![Alexa Skill Configuration Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/configuration.png "Alexa Skill Configuration Screenshot")
 
