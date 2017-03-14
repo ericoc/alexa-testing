@@ -132,11 +132,11 @@ function handle_seizure ($db_link, $user_id, $intent) {
 
 		// All set; return how many seizures were tracked today, using the users own words
 		if ($count_seizures > 0) {
-			$return = 'Okay. So far today, I have tracked ' . $count_seizures . ' ' . $intent->slots->Things->value;
+			$return = 'So far today, I have tracked ' . $count_seizures . ' ' . $intent->slots->Things->value;
 
 			// No seizures were found for today
 			} elseif ($count_seizures === 0) {
-			$return = 'Okay. No seizures have been tracked today.';
+			$return = 'No seizures have been tracked today.';
 
 		// Something went wrong trying to determine seizure count
 		} elseif ( ($count_seizures === null) || ($count_seizures < 0) ) {
