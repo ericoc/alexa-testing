@@ -1,12 +1,31 @@
+LogSeizure {PossessiveName} having a {Thing}
+LogSeizure {PossessiveName} having a {Type} {Thing}
+LogSeizure {PossessiveName} had a {Thing}
+LogSeizure {PossessiveName} had a {Type} {Thing}
+LogSeizure {Name} is having a {Thing}
+LogSeizure {Name} is having a {Type} {Thing}
+LogSeizure {Name} had a {Thing}
+LogSeizure {Name} had a {Type} {Thing}
+LogSeizure {Action} {PossessiveName} {Thing}
+LogSeizure {Action} {PossessiveName} {Type} {Thing}
+LogSeizure {Action} this {Thing}
 LogSeizure {Action} this {Type} {Thing}
+LogSeizure {Action} my {Thing}
 LogSeizure {Action} my {Type} {Thing}
+LogSeizure {Action} a {Thing}
 LogSeizure {Action} a {Type} {Thing}
-LogSeizure {Action} {Type} {Thing}
-UpdateSeizure {Thing} is over
-UpdateSeizure {Thing} ended
-UpdateSeizure {Thing} has ended
-UpdateSeizure {Thing} stopped
-UpdateSeizure {Thing} has stoppped
+UpdateSeizure it {EndWord}
+UpdateSeizure it's {EndWord}
+UpdateSeizure it has {EndWord}
+UpdateSeizure it did {EndWord}
+UpdateSeizure {Thing} it {EndWord}
+UpdateSeizure {Thing} it's {EndWord}
+UpdateSeizure {Thing} has {EndWord}
+UpdateSeizure {Thing} it has {EndWord}
+UpdateSeizure {Thing} it did {EndWord}
+UpdateSeizure {Thing} {EndWord}
+UpdateSeizure {Thing} is {EndWord}
+UpdateSeizure {Thing} has {EndWord}
 CountSeizures how many {Things}
 CountSeizures how many {Things} today
 CountSeizures count {Things}
