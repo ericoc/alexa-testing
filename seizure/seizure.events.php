@@ -97,13 +97,13 @@ function handle_seizure ($db_link, $user_id, $intent) {
 
 			// No seizure was found (in the past five minutes for this user) to mark over
 			} elseif ($update_seizure === null) {
-				$return = 'Sorry. No seizure could be fine to mark as over.';
+				$return = 'Sorry. No seizure could be found to mark as over.';
 			}
 		}
 
 	// Error
 	} else {
-		$return = 'Sorry. Please say, "Tell SeizureTracker to track a seizure", if you would like to track a seizure.';
+		$return = 'Sorry, but please say, "Tell SeizureTracker to track a seizure", if you would like to track a seizure.';
 	}
 
 	// Return whatever was specified
