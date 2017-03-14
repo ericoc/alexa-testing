@@ -72,9 +72,9 @@ function handle_seizure ($db_link, $user_id, $intent) {
 			// Try to add the seizure
 			$add_seizure = add_seizure($db_link, $user_id, $intent);
 
-			// If we got a seizure ID back, it is numeric so adding the seizure was successful
+			// If we got an ID back, it is numeric so adding the seizure was successful and we pass that along
 			if (is_numeric($add_seizure)) {
-				$return = true;
+				$return = $add_seizure;
 
 			// Something went wrong trying to add the seizure
 			} elseif ($add_seizure === null) {
