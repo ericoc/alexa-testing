@@ -32,7 +32,7 @@ if ( (!isset($input->session->user->userId)) || (empty($input->session->user->us
 
 		// The seizure was successfully tracked
 		if ( (isset($handle_seizure)) && (is_numeric($handle_seizure)) ) {
-			$message = 'Okay. The seizure has been tracked!';
+			$message = 'Okay. The seizure has been tracked.';
 
 		// Set the message awkwardly if we did not get an integer back, meaning an existing seizure got marked as over
 		// (TODO: find a better way of doing this)
@@ -41,12 +41,12 @@ if ( (!isset($input->session->user->userId)) || (empty($input->session->user->us
 
 		// Otherwise there was an error adding or finding/updating the seizure
 		} else {
-			$message = 'Sorry, but there was an error tracking the seizure!';
+			$message = 'Sorry. There was an error tracking the seizure.';
 		}
 
 	// Otherwise, there was an error finding or adding the user
 	} else {
-		$message = "Error with user!";
+		$message = "Sorry. There was an error with your user account.";
 	}
 
 	// Disconnect from MySQL
