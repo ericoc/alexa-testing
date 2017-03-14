@@ -87,14 +87,11 @@ function count_seizures($db_link, $user_id) {
 //
 function handle_seizure ($db_link, $user_id, $intent) {
 
-	error_log(print_r($intent,true));
-	error_log("User: $user_id");
-
 	// Continue with handling the seizure if there is a valid intent
 	if (isset($intent->name)) {
 
 		// Add a new seizure, if requested
-		if ($intent->name === 'LogSeizure') {
+		if ($intent->name == 'LogSeizure') {
 
 			// Try to add the seizure
 			$add_seizure = add_seizure($db_link, $user_id, $intent);
@@ -109,7 +106,7 @@ function handle_seizure ($db_link, $user_id, $intent) {
 			}
 
 		// Update the end date of a seizure that is over, if requested
-		} elseif ($intent->name === 'UpdateSeizure') {
+		} elseif ($intent->name == 'UpdateSeizure') {
 
 			// Try to update the seizure
 			$update_seizure = update_seizure($db_link, $user_id, $intent);
@@ -128,7 +125,7 @@ function handle_seizure ($db_link, $user_id, $intent) {
 			}
 
 		// Count users current number of seizures today, if requested
-		} elseif ($intent->name === 'CountSeizures') {
+		} elseif ($intent->name == 'CountSeizures') {
 
 			// Get the count of the current users seizures today
 			$count_seizures = count_seizures($db_link, $user_id);

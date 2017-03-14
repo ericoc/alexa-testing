@@ -14,9 +14,6 @@ if ( (!isset($input->session->user->userId)) || (empty($input->session->user->us
 // Otherwise, continue with finding the user and handling any intent
 } else {
 
-	// Log the input for debugging right now
-	error_log(print_r($input->request, true));
-
 	// Set MySQL database credentials and connect to MySQL
 	$db_hostname = 'localhost';
 	$db_username = $db_database = 'seizuretest';
@@ -38,6 +35,8 @@ if ( (!isset($input->session->user->userId)) || (empty($input->session->user->us
 
 			// Handle the event based on the intent sent from Alexa
 			$handle_seizure = handle_seizure($db_link, $user_id, $input->request->intent);
+
+
 
 			// Set the message awkwardly
 			// (TODO: find a better way of doing this)
