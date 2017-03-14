@@ -10,7 +10,7 @@ To get started, you will want to visit this [AWS Alexa Developer](https://develo
 
 You want to create a "Custom" skill named any thing that you would like, and the invocation name can probably either be `seizuretest` or `seizuretracker`:
 
-![Alexa Skill Information Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/skill-info.png "Alexa Skill Information Screenshot")
+![Alexa Skill Information Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/skill-info.png "Alexa Skill Information Screenshot")
 
 ---
 
@@ -18,7 +18,7 @@ You want to create a "Custom" skill named any thing that you would like, and the
 
 These settings set how users interact with Alexa based on their "intent":
 
-![Alexa Skill Interaction Model Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/interaction-model.png "Alexa Skill Interaction Model Screenshot")
+![Alexa Skill Interaction Model Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/interaction-model.png "Alexa Skill Interaction Model Screenshot")
 
 #### Intent Schema
 
@@ -119,7 +119,7 @@ which is simply the code from [here](seizure.php)
 
 ...and select "No" regarding Account Linking.
 
-![Alexa Skill Configuration Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/configuration.png "Alexa Skill Configuration Screenshot")
+![Alexa Skill Configuration Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/configuration.png "Alexa Skill Configuration Screenshot")
 
 ---
 
@@ -129,7 +129,7 @@ Select the second option of:
 
 `My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority`
 
-![Alexa Skill SSL Certificate Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/ssl-certificate.png "Alexa Skill SSL Certificate Screenshot")
+![Alexa Skill SSL Certificate Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/ssl-certificate.png "Alexa Skill SSL Certificate Screenshot")
 
 ---
 
