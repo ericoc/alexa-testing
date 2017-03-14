@@ -87,6 +87,9 @@ function count_seizures($db_link, $user_id) {
 //
 function handle_seizure ($db_link, $user_id, $intent) {
 
+	error_log(print_r($intent,true));
+	error_log("User: $user_id");
+
 	// Continue with handling the seizure if there is a valid intent
 	if (isset($intent->name)) {
 
