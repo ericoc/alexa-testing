@@ -24,7 +24,7 @@ For the "Intent Schema", simply paste the JSON contents of the [seizure-intents.
 
 #### Custom Slot Types
 
-Create the custom slot types as defined within the [custom-slots.txt file from this repository](custom-slots.txt) in this repository.
+Create the custom slot types as defined within the [slot-types.txt file from this repository](slot-types.txt) in this repository.
 
 #### Sample Utterances
 
