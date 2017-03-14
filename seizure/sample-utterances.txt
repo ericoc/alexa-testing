@@ -1,0 +1,13 @@
+LogSeizure {Action} this {Type} {Thing}
+LogSeizure {Action} my {Type} {Thing}
+LogSeizure {Action} a {Type} {Thing}
+LogSeizure {Action} {Type} {Thing}
+UpdateSeizure {Thing} is over
+UpdateSeizure {Thing} ended
+UpdateSeizure {Thing} has ended
+UpdateSeizure {Thing} stopped
+UpdateSeizure {Thing} has stoppped
+CountSeizures how many {Things}
+CountSeizures how many {Things} today
+CountSeizures count {Things}
+CountSeizures count {Things} today

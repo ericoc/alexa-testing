@@ -1,0 +1,4 @@
+BAD_SEIZURE_TYPES	complex | complex partial | bad | terrible | major | awful
+SEIZURE_ACTIONS		add | log | track | record | store | report | is having | I'm having | I am having
+THINGS			event | seizure
+PLURAL_THINGS		seizures | events

@@ -1,30 +1,39 @@
 {
-    "intents": [
+  "intents": [
     {
-        "intent": "LogSeizure",
-        "slots": [
-            {
-                "name": "Type",
-                "type": "BAD_SEIZURE_TYPES"
-            },
-            {
-                "name": "Action",
-                "type": "SEIZURE_ACTION"
-            },
-            {
-                "name": "Thing",
-                "type": "THING"
-            }
-        ]
+      "intent": "LogSeizure",
+      "slots": [
+        {
+          "name": "Type",
+          "type": "BAD_SEIZURE_TYPES"
+        },
+        {
+          "name": "Action",
+          "type": "SEIZURE_ACTIONS"
+        },
+        {
+          "name": "Thing",
+          "type": "THINGS"
+        }
+      ]
     },
     {
-        "intent": "UpdateSeizure",
-        "slots": [
-            {
-                "name": "Thing",
-                "type": "THING"
-            }
-        ]
+      "intent": "UpdateSeizure",
+      "slots": [
+        {
+          "name": "Thing",
+          "type": "THINGS"
+        }
+      ]
+    },
+    {
+      "intent": "CountSeizures",
+      "slots": [
+        {
+          "name": "Things",
+          "type": "PLURAL_THINGS"
+        }
+      ]
     }
-    ]
+  ]
 }
