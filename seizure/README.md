@@ -2,12 +2,13 @@
 
 The following documentation should explain how to set up this custom Alexa skill that can hopefully eventually work with [SeizureTracker.com](https://www.seizuretracker.com).
 
-Right now it simply works with a small MySQL database, but in the future should use an API making it so that you can do all of the following with Alexa voice commands to an Echo (dot):
+Right now it simply works with a small MySQL database, but in the future should use an API making it so that you can do all of the following with Alexa voice commands to an Amazon Echo (dot):
 
   * Track a seizure
   * Track said seizure as being over
   * Count seizures that have occurred today
 
+---
 
 ## Local Setup
 
@@ -17,7 +18,7 @@ To get started, you will want to visit this [AWS Alexa Developer](https://develo
 
 ### Skill Information
 
-You want to create a "Custom" skill named any thing that you would like, and the invocation name can probably either be `seizuretest` or `seizuretracker`:
+You want to create a "Custom" skill named any thing that you would like, and the invocation name should probably be `seizuretracker`:
 
 ![Alexa Skill Information Screenshot](https://raw.githubusercontent.com/ericoc/alexa-testing/master/seizure/images/skill-info.png "Alexa Skill Information Screenshot")
 
@@ -70,7 +71,7 @@ Simply select the second option of:
 
 Finally, an easy way to test all of the above is to enter a phrase such as one of the following in to the "`Enter Utterance`" field:
 
-  *	 `Track a seizure`
+  *	`Track a seizure`
     - should hopefully return a valid JSON response that you can listen to within the browser!
 
   * `Seizure is over`
@@ -79,6 +80,7 @@ Finally, an easy way to test all of the above is to enter a phrase such as one o
   * `Count seizures`
     - should let you track the number of seizures that are stored in the database for the current date
 
+---
 
 ## Conclusion
 
