@@ -5,17 +5,9 @@
 //
 function add_seizure($db_link, $user_id, $intent) {
 
-	// Set if it was a bad seizure
-	if ( (isset($intent->slots->Type->value)) && (in_array($intent->slots->Type->value, array('complex', 'complex partial', 'bad', 'terrible', 'major', 'awful'))) ) {
-		$seizure_type = 'bad';
-	} else {
-		$seizure_type = 'okay';
-	}
-
 	// Add seizure to database
-	$add_seizure = $db_link->prepare("INSERT INTO `seizures` VALUES (0, :user_id, :seizure_type, NOW(), NULL)");
+	$add_seizure = $db_link->prepare("INSERT INTO `seizures` VALUES (0, :user_id, NOW(), NULL)");
 	$add_seizure->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-	$add_seizure->bindValue(':seizure_type', $seizure_type, PDO::PARAM_STR);
 
 	// Return the seizure ID if it was successfully added!
 	if ($add_seizure->execute()) {

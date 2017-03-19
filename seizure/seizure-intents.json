@@ -4,10 +4,6 @@
       "intent": "LogSeizure",
       "slots": [
         {
-          "name": "Type",
-          "type": "BAD_SEIZURE_TYPES"
-        },
-        {
           "name": "Action",
           "type": "SEIZURE_ACTIONS"
         },
@@ -20,7 +16,7 @@
           "type": "AMAZON.US_FIRST_NAME"
         },
         {
-          "name": "PossessiveName",
+          "name": "Names",
           "type": "AMAZON.US_FIRST_NAME's"
         }
       ]
@@ -33,8 +29,20 @@
           "type": "THINGS"
         },
         {
+          "name": "Things",
+          "type": "PLURAL_THINGS"
+        },
+        {
           "name": "EndWord",
           "type": "END_WORDS"
+        },
+        {
+          "name": "Name",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "Names",
+          "type": "AMAZON.US_FIRST_NAME's"
         }
       ]
     },
@@ -44,6 +52,14 @@
         {
           "name": "Things",
           "type": "PLURAL_THINGS"
+        },
+        {
+          "name": "Name",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "Names",
+          "type": "AMAZON.US_FIRST_NAME's"
         }
       ]
     }
