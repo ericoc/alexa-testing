@@ -1,5 +1,6 @@
 <?php
 
+// Create an array of arrays of all the games ($games!)
 $games = array(
 
 	'20171004' => array(
@@ -717,7 +718,7 @@ function create_phrase ($game) {
 	// Include the time, date, stadium, city, and state at the end of the friendly phrase
 	$when = strtotime($game['when']);
 	$phrase .= ' at ' . date('g:i A', $when) . ' on ' . date('l, F jS', $when);
-	$phrase .= ' at ' . $game['stadium'] . ' in ' . $game['city'] . ', ' . $game['state'];
+	$phrase .= ' at ' . $game['location'] . ' in ' . $game['city'] . ', ' . $game['state'];
 
 	// Return the phrase string that was built!
 	return $phrase;
