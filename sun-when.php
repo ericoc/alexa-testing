@@ -20,6 +20,9 @@ TODO: store the sunrise/sunset object in memcache/redis to avoid hitting the API
 // Require the file with the BriefingOut function that builds a JSON response
 require_once('alexa.func.php');
 
+// Set the time zone for the location we are querying (Philadelphia)
+date_default_timezone_set('America/New_York');
+
 // Create a function to get sunrise and sunset times from an API (thanks http://sunrise-sunset.org/ !)
 function getSunTimes ($latitude, $longitude, $when = 'today') {
 
